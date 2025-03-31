@@ -1,0 +1,54 @@
+services:
+
+  fa_python:
+    entrypoint: sh start.sh
+#    command: /bin/sh -c "while true; do sleep 30; done"
+#    command: uvicorn main:app --port 8009 --host 0.0.0.0
+    container_name: fa_python
+    build:
+      context: .
+    volumes:
+      - .:/FA
+    ports:
+      - '8009:8009' # uvicorn
+    working_dir: /FA
+    # privileged: true
+    # restart: on-failure
+    # environment:
+    #   - PYTHONPATH = / # fixing python path when changing the working directory
+    #   - WATCHFILES_FORCE_POLLING=true # This is needed for hot reloading to work on windows  (fix watch feature) for python
+    #   - WATCHPACK_POLLING=true # This is needed for hot reloading to work on windows  (fix watch feature)
+    #   - CHOKIDAR_USEPOLLING=true # This is needed for hot reloading to work on windows (fix watch feature)
+    #   - FORCE_COLOR="1" # This forces colors in the terminal + fix chalk colors
+    #   - PYTHONUNBUFFERED=1 # This stops Python from buffering stdout so that you can see logs in real-time
+    depends_on:
+      - fa_postgres_test
+      - fa_postgres
+
+  fa_postgres:
+    image: postgres
+    ports:
+      - '8010:5432'
+    environment:
+      - POSTGRES_DB=fa_postgres
+      - POSTGRES_USER=fa_postgres
+      - POSTGRES_PASSWORD=fa_postgres
+    container_name: fa_postgres
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+  fa_postgres_test:
+    image: postgres
+    ports:
+      - '8013:5432'
+    environment:
+      - POSTGRES_DB=fa_postgres_test
+      - POSTGRES_USER=fa_postgres_test
+      - POSTGRES_PASSWORD=fa_postgres_test
+    container_name: fa_postgres_test
+    volumes:
+      - postgresql_data_test:/var/lib/postgresql/data
+
+volumes:
+  postgresql_data: null
+  postgresql_data_test: null

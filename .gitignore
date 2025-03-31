@@ -1,0 +1,71 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# Database files and migrations
+*.sqlite3
+db.sqlite3
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+
+# Logs and runtime data
+logs/
+*.log
+nohup.out
+
+# Docker
+*.pid
+docker-compose.override.yml
+dist/
+*.tar
+*.gz
+
+# Python dependency files
+*.egg-info/
+*.egg
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Editor and OS-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Compiled C extensions
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# FastAPI / Uvicorn logs
+*.uvicorn.log
+
+# PostgreSQL data
+postgresql_data/
+postgresql_data_test/
+
+# Docker build artifacts
+**/__pycache__/
+**/*.pyc
+**/*.pyo
